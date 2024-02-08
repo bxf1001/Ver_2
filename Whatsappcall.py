@@ -31,8 +31,8 @@ def phone_number(number):
             time.sleep(1)
             continue
 
-    #time.sleep(2)
-    #pyautogui.hotkey('win', 'up')
+    time.sleep(2)
+    pyautogui.hotkey('win', 'up')
 #Start recording
     try:
         while True:
@@ -63,8 +63,12 @@ def phone_number(number):
 def timer(timer_1):
 #This is timer
     time.sleep(timer_1*60)
-    app = Application(backend='uia').connect(title_re="WhatsApp") # Replace with the actual path
-    app.Dialog.child_window(title="End call", auto_id="EndCallButton", control_type="Button").click()
+    try:
+        app = Application(backend='uia').connect(title_re="WhatsApp") # Replace with the actual path
+        app.Dialog.child_window(title="End call", auto_id="EndCallButton", control_type="Button").click()
+    except:
+        time.sleep(2)
+        subprocess.call("TASKKILL /F /IM whatsapp.exe", shell=True)
 
     if timer_1<9:
 #Unlock 
