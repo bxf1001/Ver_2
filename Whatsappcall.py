@@ -51,7 +51,7 @@ def phone_number(number):
             continue
         
     time.sleep(5)
-    pyautogui.hotkey('ctrl', 'alt', 'num0')
+    send_keys("^%{VK_NUMPAD0}")
 #button_location1 = pyautogui.locateCenterOnScreen('end_button.png')
 
 # Click the button
@@ -71,14 +71,14 @@ def timer(timer_1):
     if timer_1<9:
 #Unlock 
         time.sleep(1)
-        pyautogui.hotkey('ctrl', 'alt', 'num0')
+        send_keys("^%{VK_NUMPAD0}")
 
 #stop Recording
         time.sleep(2)
         send_keys("{VK_F12}")
 #Final Lock
         time.sleep(2)
-        pyautogui.hotkey('ctrl', 'alt', 'num0')
+        send_keys("^%{VK_NUMPAD0}")
 
 
     
