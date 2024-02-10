@@ -5,6 +5,8 @@ import time
 import subprocess
 import time
 from pywinauto import Application
+from pywinauto.keyboard import send_keys
+
 
 
    #Add Number & Press F5
@@ -39,7 +41,7 @@ def phone_number(number):
     while True:
         try:
             if button.is_enabled():
-                pyautogui.press('f12')
+                send_keys("{VK_F12}")
                 break  # Button is enabled, so click it and exit the loop
 
 #Puts First LK
@@ -73,7 +75,7 @@ def timer(timer_1):
 
 #stop Recording
         time.sleep(2)
-        pyautogui.press('f12')
+        send_keys("{VK_F12}")
 #Final Lock
         time.sleep(2)
         pyautogui.hotkey('ctrl', 'alt', 'num0')
