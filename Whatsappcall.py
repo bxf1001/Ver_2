@@ -31,29 +31,25 @@ def phone_number(number):
             time.sleep(1)
             continue
 
-    time.sleep(2)
-    pyautogui.hotkey('win', 'up')
+    #time.sleep(2)
+    #pyautogui.hotkey('win', 'up')
 #Start recording
-    try:
-        while True:
-            try:
-                button_location = pyautogui.locateOnScreen('ringing.png')
-                button_center = pyautogui.center(button_location)
-                pyautogui.click(button_center.x, button_center.y)
-                time.sleep(30)
-                button_center = pyautogui.press("f12")
-                break
-            except:
-                time.sleep(1)
-                continue
+    dialog = app.window(title="Video call ‎- WhatsApp")
+    button = dialog.child_window(title="Add members", auto_id="ParticipantSideBarTriggerButton", control_type="Button")
+    while True:
+        try:
+            if button.is_enabled():
+                pyautogui.press('f12')
+                break  # Button is enabled, so click it and exit the loop
 
 #Puts First LK
-        time.sleep(5)
-        pyautogui.hotkey('ctrl', 'alt', 'num0')
-    except:
-        time.sleep(1)
-        subprocess.call("TASKKILL /F /IM whatsapp.exe", shell=True)
 
+        except:
+            time.sleep(1)
+            continue
+        
+    time.sleep(5)
+    pyautogui.hotkey('ctrl', 'alt', 'num0')
 #button_location1 = pyautogui.locateCenterOnScreen('end_button.png')
 
 # Click the button
@@ -67,9 +63,9 @@ def timer(timer_1):
         app = Application(backend='uia').connect(title_re="WhatsApp") # Replace with the actual path
         app.Dialog.child_window(title="End call", auto_id="EndCallButton", control_type="Button").click()
     except:
-        time.sleep(2)
+        time.sleep(10)
         subprocess.call("TASKKILL /F /IM whatsapp.exe", shell=True)
-
+        
     if timer_1<9:
 #Unlock 
         time.sleep(1)
