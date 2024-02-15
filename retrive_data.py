@@ -98,12 +98,28 @@ class UserDataWidget(QWidget):
 
             # Get the current key from the combo box
             key = self.key_combo.currentText()
-            key_1 = self.key_combo_1.currentText()
+            
 
             # Set the value label to the corresponding value
             self.value_label.setText(f"Value: {values[key]}")
-            self.value_label.setText(f"Value: {values[key_1]}")
+            
 
+    def print_value_1(self):
+        # Get the user id from the line edit
+        user_id = self.user_id_edit.text()
+
+        # Check if the user id is in the user data dictionary
+        if user_id in user_data:
+            # Get the values for the user id
+            values = user_data[user_id]
+
+            # Get the current key from the combo box
+            
+            key_1 = self.key_combo_1.currentText()
+
+            # Set the value label to the corresponding value
+            
+            self.value_label.setText(f"Value: {values[key_1]}")
     def make_call(self):
         # Get the user id from the line edit
         user_id = self.user_id_edit.text()
@@ -126,8 +142,6 @@ class UserDataWidget(QWidget):
         Whatsappcall.phone_number(value)
         Whatsappcall.timer(add_time)
 
-        Whatsappcall.phone_number(value_1)
-        Whatsappcall.timer(add_time)
 
         # Print the value and the time to the console
         print(f"{value} (Called at {add_time})")
