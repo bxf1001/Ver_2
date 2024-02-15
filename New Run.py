@@ -2,7 +2,9 @@ import json
 import datetime
 from time import sleep
 import Whatsappcall
-import pyautogui
+
+from pywinauto.keyboard import send_keys
+
 try:
     with open('user_data.json', 'r') as f:
         user_data = json.load(f)
@@ -35,21 +37,26 @@ def retrieve_data():
                 print(user_data[user_id])
             elif field in user_data[user_id]:
                 add_time=float(input("enter time:: "))
-                Whatsappcall.phone_number(user_data[user_id][field])
-                Whatsappcall.timer(add_time)
-                add_timer1 = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
-                print(f"{user_data[user_id][field]} (Called at {add_timer1})")
-                timestamped_data = {
-                    "user_id": user_id,
-                    "field": field,
-                    "number": user_data[user_id][field],
-                    "timestamp": add_timer1
-                }
-                with open('timestamped_data.json', 'a') as f:
-                    json.dump(timestamped_data, f)
-                    f.write('\n')  # Add a newline for readability
+                if add_time<10:
+
+                    Whatsappcall.phone_number(user_data[user_id][field])
+                    Whatsappcall.timer(add_time)
+                    add_timer1 = datetime.datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+                    print(f"{user_data[user_id][field]} (Called at {add_timer1})")
+                    timestamped_data = {
+                        "user_id": user_id,
+                        "field": field,
+                        "number": user_data[user_id][field],
+                        "timestamp": add_timer1
+                    }
+                    with open('timestamped_data.json', 'a') as f:
+                        json.dump(timestamped_data, f)
+                        f.write('\n')  # Add a newline for readability
+                else:
+                    print("Time Limit Can't Exceed more than 10 Min")
+                    
             else:
-                print("Invalid field.")
+                print("Invalid Field")
         else:
             print("User not found.")
       
@@ -78,7 +85,7 @@ def retrieve_data():
                     json.dump(timestamped_data, f)
                     f.write('\n')  # Add a newline for readability
                 sleep(1)
-                pyautogui.hotkey('ctrl', 'alt', 'num0')
+                send_keys("^%{VK_NUMPAD0}")
                 sleep(3)
                 Whatsappcall.phone_number(user_data[user_id][field2])
                 Whatsappcall.timer(add_time2)
