@@ -2,11 +2,13 @@ from pywinauto import Application
 from pywinauto.keyboard import send_keys
 import time
 app = Application(backend='uia').start(r"cmd.exe /c start shell:appsFolder\5319275A.WhatsAppDesktop_cv1g1gvanyjgm!App", create_new_console=True, wait_for_idle=False)
-
+time.sleep(2)
 app = Application(backend='uia').connect(title_re="WhatsApp")
+time.sleep(2)
 dialog = app.window(title="Group video call \u200e- WhatsApp")
+time.sleep(2)
 button = dialog.child_window(title="Group video call ‎- WhatsAApp", auto_id="TitleBar", control_type="Window")
-app.dialog.print_control_identifiers()
+#app.dialog.print_control_identifiers()
 while True:
     try:
         if button.is_enabled():
