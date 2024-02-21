@@ -6,6 +6,10 @@ import subprocess
 import time
 from pywinauto import Application
 from pywinauto.keyboard import send_keys
+from AppOpener import open, close
+
+# Open WhatsApp
+
 
 
 
@@ -15,6 +19,7 @@ pyautogui.FailSafeException = False
 
 
 def phone_number(number):
+    open("Bandicam")
     app = Application(backend='uia').start(r"cmd.exe /c start shell:appsFolder\5319275A.WhatsAppDesktop_cv1g1gvanyjgm!App", create_new_console=True, wait_for_idle=False)
     time.sleep(2)
     app = Application(backend='uia').connect(title_re="WhatsApp") # Replace with the actual path
@@ -58,9 +63,9 @@ def phone_number(number):
 #time.sleep(0.5)
 #pyautogui.click(button_location1)
 
-def timer(timer_1):
+def timer(timer):
 #This is timer
-    time.sleep(timer_1*60)
+    time.sleep(timer*60)
     try:
         app = Application(backend='uia').connect(title_re="WhatsApp") # Replace with the actual path
         app.Dialog.child_window(title="End call", auto_id="EndCallButton", control_type="Button").click()
@@ -68,7 +73,7 @@ def timer(timer_1):
         time.sleep(10)
         subprocess.call("TASKKILL /F /IM whatsapp.exe", shell=True)
         
-    if timer_1<9:
+    if timer<9:
 #Unlock 
         time.sleep(1)
         send_keys("^%{VK_NUMPAD0}")
