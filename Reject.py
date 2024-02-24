@@ -1,3 +1,4 @@
+import subprocess
 from pywinauto import Application
 from pywinauto.keyboard import send_keys
 import PySimpleGUI as sg
@@ -11,14 +12,14 @@ dialog = app.window(title="Group video call ‎- WhatsApp")
 while True:
     try:
         if dialog.is_enabled():
-            time.sleep(2)
-            dialog.child_window(title="End call", auto_id="EndCallButton", control_type="Button").click()
-            time.sleep(1)
+            time.sleep(2) 
             sg.theme('NeutralBlue')
             layout=[sg.popup('Conference Not Allowed',font='stencil 50')]
-
-
+            time.sleep(2)
+            subprocess.call("TASKKILL /F /IM whatsapp.exe", shell=True)
+            send_keys("^%{VK_NUMPAD0}")
             send_keys("{VK_F12}")
+            send_keys("^%{VK_NUMPAD0}")
             break  # Button is enabled, so click it and exit the loop
 
 #Puts First LK
@@ -26,4 +27,3 @@ while True:
     except:
         time.sleep(1)
         continue
-
